@@ -1,0 +1,11 @@
+# Server and OS
+.DS_Store
+.htaccess
+.well-known
+.ftpquota
+
+# WordPress
+/wp-content/upgrade/
+/wp-content/upgrade-temp-backup/
+/wp-content/debug.log
+/wp-content/db.php

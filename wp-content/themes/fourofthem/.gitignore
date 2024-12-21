@@ -1,0 +1,12 @@
+# OS generated files
+.DS_Store
+
+# Composer
+/vendor
+
+# Node
+/node_modules
+npm-debug.log
+
+# Compiled assets
+/assets/dist

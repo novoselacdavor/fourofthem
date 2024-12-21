@@ -1,0 +1,9 @@
+{
+  "name": "davor/fourofthem",
+  "description": "Fourofthem theme",
+  "type": "wordpress-theme",
+  "require": {},
+  "config": {
+    "optimize-autoloader": true
+  }
+}
