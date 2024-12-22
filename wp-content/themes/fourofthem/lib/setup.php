@@ -18,10 +18,15 @@ add_action(
 		// Register menus.
 		register_nav_menus(
 			[
-				'main_navigation'   => __( 'Main Navigation', 'gljz' ),
-				'footer_navigation' => __( 'Footer Navigation', 'gljz' ),
+				'main_navigation'   => __( 'Main Navigation', 'fourofthem' ),
+				'footer_navigation' => __( 'Footer Navigation', 'fourofthem' ),
 			]
 		);
+
+		// Add image sizes
+		add_image_size( 'img-full-hd', 1920, 1080, true ); // full hd image
+		add_image_size( 'img-3x2-1200', 1200, 800, true ); // post featured image
+		add_image_size( 'img-3x2-450', 450, 300, true ); // post listing image
 	}
 );
 
@@ -48,6 +53,10 @@ add_action(
 		if ( Fot_Assets::asset_exists( 'main.css' ) ) {
 			wp_enqueue_style( 'pg-main', Fot_Assets::get_asset_uri( 'main.css' ), [], false );
 		}
+
+		// Theme fonts.
+		wp_enqueue_style( 'josefin-sans', 'https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,600;1,400&display=swap', [], null );
+		wp_enqueue_style( 'crimson-text', 'https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap', [], null );
 
 	},
 	PHP_INT_MAX

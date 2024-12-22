@@ -1,8 +1,8 @@
 <?php
 /**
- * Fot_Assets helper class.
+ * FOT_Assets helper class.
  */
-final class Fot_Assets {
+final class FOT_Assets {
 	/**
 	 * Theme template directory absolute server path.
 	 *
@@ -75,6 +75,6 @@ final class Fot_Assets {
 }
 
 /**
- * Init Fot_Assets helper class.
+ * Init FOT_Assets helper class.
  */
-Fot_Assets::init();
+FOT_Assets::init();

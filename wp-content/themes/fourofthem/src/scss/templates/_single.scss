@@ -1,0 +1,61 @@
+/**
+ * Single
+ */
+
+.single {
+  &__entry {
+    position: relative;
+    height: 30rem;
+
+    @include media-breakpoint-up(s) {
+      height: 40rem;
+    }
+
+    @include media-breakpoint-up(md) {
+      height: 60rem;
+    }
+  }
+
+  &__categories {
+    display: flex;
+    flex-wrap: wrap;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: .2rem;
+      margin: calc($spacing * 2) 0;
+      background-color: $orange;
+    }
+
+    span {
+      font-weight: 700;
+    }
+
+    a {
+      margin-left: $spacing;
+    }
+  }
+
+  &__title {
+    position: absolute;
+    left: 2rem;
+    bottom: 2rem;
+    color: $orange;
+
+    @include media-breakpoint-down(s) {
+      font-size: 3.2rem;
+    }
+  }
+
+  &__img-wrap {
+    height: inherit;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

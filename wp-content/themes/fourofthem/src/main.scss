@@ -2,6 +2,21 @@
 @import "./scss/core/functions/breakpoints.scss";
 @import "./scss/core/mixins/breakpoints.scss";
 @import "./scss/core/reset.scss";
+@import "./scss/core/variables.scss";
 @import "./scss/core/helpers.scss";
 @import "./scss/core/grid.scss";
-@import "./scss/core/variables.scss";
+@import "./scss/core/typography.scss";
+
+// Partials
+@import "./scss/partials/_header.scss";
+@import "./scss/partials/_footer.scss";
+
+// Components
+@import "./scss/components/_logo.scss";
+@import "./scss/components/_navigation.scss";
+@import "./scss/components/_toggle.scss";
+@import "./scss/components/_card.scss";
+
+// Templates
+@import "./scss/templates/_archive.scss";
+@import "./scss/templates/_single.scss";

@@ -1,5 +1,10 @@
 <?php
 get_header();
-// Front-page template
-echo '<h1>Front Page</h1>';
+?>
+<div class="container">
+
+
+</div>
+<?php
 get_footer();
+?>

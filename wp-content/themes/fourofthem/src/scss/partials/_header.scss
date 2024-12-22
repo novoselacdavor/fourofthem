@@ -1,0 +1,16 @@
+/**
+ * Header
+ */
+
+.header {
+  background-color: $gray-01;
+  box-shadow: 0 0 1rem .25rem $gray-03;
+  max-height: 8rem;
+
+  &__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: ( $spacing * 2 ) 0;
+  }
+}

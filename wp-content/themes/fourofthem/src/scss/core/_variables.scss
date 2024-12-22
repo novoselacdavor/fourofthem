@@ -4,17 +4,17 @@
 
 
 /**
- * Rem settings
- */
-$rem-size: 10px;
-
-
-/**
  * Colors
  */
 
+$orange: #FF8400;
+$red: #ff0000;
 $white: #fff;
 $black: #000;
+$gray-01:  #f9f8f8;
+$gray-02:  #eee8e8;
+$gray-03:  #d8d2ce;
+
 
 /**
  * $colors map.
@@ -30,17 +30,6 @@ $colors: (
  */
 
 $spacing: .8rem;
-$spacings: (
-  0: 0,
-  1: calc($spacing * 1),
-  2: calc($spacing * 2),
-  3: calc($spacing * 3),
-  4: calc($spacing * 4),
-  5: calc($spacing * 5),
-  6: calc($spacing * 6),
-  7: calc($spacing * 7),
-  8: calc($spacing * 8),
-);
 
 
 /**
@@ -49,19 +38,9 @@ $spacings: (
 
 $grid-breakpoints: (
   sm: 0,
+  s: 480px,
   md: 768px,
   lg: 1200px,
-);
-
-
-/**
- * Container
- */
-
-$container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 1600px,
 );
 
 
@@ -69,45 +48,12 @@ $container-max-widths: (
  * Transitions
  */
 
-$trans-duration-base: .2s;
+$trans-duration-base: .3s;
 $trans-timing-function-base: ease-in-out;
 
 
 /**
- * Typography
+ * Font family
  */
-
-h1, .h1 {
-  font-size: 5.6rem;
-  line-height: 1.5;
-}
-
-h2, .h2 {
-  font-size: 4.8rem;
-  line-height: 1.5;
-}
-
-h3, .h3 {
-  font-size: 4rem;
-  line-height: 1.5;
-}
-
-h4, .h4 {
-  font-size: 3.2rem;
-  line-height: 1.5;
-}
-
-h5, .h5 {
-  font-size: 2.4rem;
-  line-height: 1.5;
-}
-
-h6, .h6 {
-  font-size: 1.6rem;
-  line-height: 1.5;
-}
-
-p, .p {
-  font-size: 1.6rem;
-  line-height: 1.5;
-}
+$font-family-sans-serif: "Josefin Sans", sans-serif;
+$font-family-serif: "Crimson Text", serif;

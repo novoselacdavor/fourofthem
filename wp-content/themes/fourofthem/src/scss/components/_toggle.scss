@@ -1,0 +1,39 @@
+/**
+ * Toggle
+ */
+
+.toggle {
+  display: inline-flex;
+  justify-self: flex-end;
+  cursor: pointer;
+
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+}
+
+.toggle-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing;
+  border: .1rem solid $black;
+  border-radius: .4rem;
+  text-transform: uppercase;
+  width: 6rem;
+
+  &--open {
+    @at-root .mobile-menu-active & {
+      display: none;
+    }
+  }
+
+  &--close {
+    display: none;
+    padding: $spacing;
+
+    @at-root .mobile-menu-active & {
+      display: flex;
+    }
+  }
+}

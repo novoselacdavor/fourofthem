@@ -13,10 +13,26 @@
 }
 
 body {
+  font-size: 1.6rem;
   /* 3. Add accessible line-height */
   line-height: 1.5;
   /* 4. Improve text rendering */
   -webkit-font-smoothing: antialiased;
+
+  &.mobile-menu-active {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    // If admin par is present
+    &.admin-bar {
+      padding-top: 3.2rem;
+
+      @media screen and (max-width: 782px) {
+        padding-top: 4.6rem;
+      }
+    }
+  }
 }
 
 /* 5. Improve media defaults */

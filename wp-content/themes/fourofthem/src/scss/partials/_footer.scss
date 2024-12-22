@@ -1,0 +1,21 @@
+/**
+ * Footer
+ */
+
+.footer {
+  background-color: $gray-01;
+  box-shadow: 0 0 1rem .25rem $gray-03;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: calc($spacing * 2) 0;
+    text-align: center;
+    justify-items: center;
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: 1fr 1fr;
+      justify-items: stretch;
+    }
+  }
+}
