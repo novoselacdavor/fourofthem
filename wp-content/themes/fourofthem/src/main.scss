@@ -11,18 +11,21 @@
 @import "./scss/vendor-modifiers/swiper";
 
 // Partials
-@import "./scss/partials/_header.scss";
-@import "./scss/partials/_footer.scss";
+@import "./scss/partials/header.scss";
+@import "./scss/partials/footer.scss";
 
 // Components
-@import "./scss/components/_logo.scss";
-@import "./scss/components/_button.scss";
-@import "./scss/components/_navigation.scss";
-@import "./scss/components/_toggle.scss";
-@import "./scss/components/_card.scss";
-@import "./scss/components/_hero-slider.scss";
+@import "./scss/components/logo.scss";
+@import "./scss/components/button.scss";
+@import "./scss/components/navigation.scss";
+@import "./scss/components/toggle.scss";
+@import "./scss/components/card.scss";
+@import "./scss/components/hero-slider.scss";
+
+// Blocks
+@import "./scss/blocks/favorite-movie-quotes.scss";
 
 // Templates
-@import "./scss/templates/_archive.scss";
-@import "./scss/templates/_single.scss";
-@import "./scss/templates/_item-listing.scss";
+@import "./scss/templates/archive.scss";
+@import "./scss/templates/single.scss";
+@import "./scss/templates/item-listing.scss";

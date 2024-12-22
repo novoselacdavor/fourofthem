@@ -1,0 +1,30 @@
+.favorite-movie-quotes {
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+
+  &__item {
+    background-color: $gray-02;
+    padding: $spacing;
+  }
+
+  &__movie {
+    margin-bottom: $spacing;
+
+    img {
+      width: 100%;
+      height: auto;
+      margin-bottom: $spacing;
+    }
+  }
+}

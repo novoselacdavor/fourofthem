@@ -40,23 +40,51 @@ add_action(
 		// Use new version of jQuery on CDN and move it to the footer.
 		if ( ! is_admin() ) {
 			wp_deregister_script( 'jquery' );
-			wp_register_script( 'jquery', 'https://code.jquery.com/jquery-3.7.1.min.js', [], '3.7.1', true );
+			wp_register_script(
+				'jquery',
+				'https://code.jquery.com/jquery-3.7.1.min.js',
+				[],
+				'3.7.1',
+				true
+			);
 			wp_enqueue_script( 'jquery' );
 		}
 
 		// Theme main JavaScript.
 		if ( Fot_Assets::asset_exists( 'main.js' ) ) {
-			wp_enqueue_script( 'pg-main', Fot_Assets::get_asset_uri( 'main.js' ), [], false, true );
+			wp_enqueue_script(
+				'fot-main',
+				Fot_Assets::get_asset_uri( 'main.js' ),
+				[],
+				false,
+				true
+			);
 		}
 
 		// Theme main CSS.
 		if ( Fot_Assets::asset_exists( 'main.css' ) ) {
-			wp_enqueue_style( 'pg-main', Fot_Assets::get_asset_uri( 'main.css' ), [], false );
+			wp_enqueue_style(
+				'fot-main',
+				Fot_Assets::get_asset_uri('main.css'),
+				[],
+				false
+			);
 		}
 
 		// Theme fonts.
-		wp_enqueue_style( 'josefin-sans', 'https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,600;1,400&display=swap', [], null );
-		wp_enqueue_style( 'crimson-text', 'https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap', [], null );
+		wp_enqueue_style(
+			'josefin-sans',
+			'https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,600;1,400&display=swap',
+			[],
+			null
+		);
+
+		wp_enqueue_style(
+			'crimson-text',
+			'https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap',
+			[],
+			null
+		);
 
 	},
 	PHP_INT_MAX

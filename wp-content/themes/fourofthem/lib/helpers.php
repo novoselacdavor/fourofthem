@@ -97,3 +97,24 @@ add_shortcode(
 		return $output;
 	}
 );
+
+
+add_action(
+	'acf/init',
+	function() {
+		// check function exists
+		if( function_exists('acf_register_block') ) {
+
+			// register a testimonial block
+			acf_register_block(array(
+				'name'              => 'testimonial',
+				'title'             => __('Testimonial'),
+				'description'       => __('A custom testimonial block.'),
+				'render_callback'   => 'my_acf_block_render_callback',
+				'category'          => 'formatting',
+				'icon'              => 'admin-comments',
+				'keywords'          => array( 'testimonial', 'quote' ),
+			));
+		}
+	}
+);
