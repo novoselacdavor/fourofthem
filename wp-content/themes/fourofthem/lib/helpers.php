@@ -13,7 +13,7 @@
  * @param bool $default The default value to return if there is no value in the field.
  * @return mixed Field value or $default.
  */
-function fourofthem_get_field( string $field_selector, $post_id = null, bool $format_value = true, $default = false ) {
+function fot_get_field( string $field_selector, $post_id = null, bool $format_value = true, $default = false ) {
 	// Assume we don't have any value and set it to $default.
 	$return_value = $default;
 

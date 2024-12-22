@@ -1,0 +1,89 @@
+/**
+ * Hero slider
+ */
+
+.hero-slider {
+  margin-bottom: 0;
+  overflow: hidden;
+  position: relative;
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: calc( $spacing * 5 );
+  }
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    @include media-breakpoint-up(lg) {
+      flex-wrap: nowrap;
+      height: 60rem;
+    }
+  }
+
+  &__image-column,
+  &__content-column {
+    flex: 1 0 100%;
+
+    @include media-breakpoint-up(lg) {
+      flex: 1 0 50%;
+    }
+  }
+
+  &__image-column {
+    height: inherit;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__title {
+    margin: calc($spacing * 2) 0 0;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 3.2rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      text-transform: uppercase;
+    }
+  }
+
+  &__description {
+    margin-top: calc( $spacing * 2 );
+    margin-bottom: calc( $spacing * 3 );
+
+    @include media-breakpoint-up(lg) {
+      margin-bottom: calc( $spacing * 3 );
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__content {
+    padding: calc($spacing * 5) calc($spacing * 3);
+
+    @include media-breakpoint-up(lg) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-grow: 1;
+      align-items: flex-start;
+      padding: calc( $spacing * 5 ) calc( $spacing * 4 );
+    }
+  }
+
+  .btn {
+    width: 100%;
+
+    @include media-breakpoint-up(md) {
+      width: auto;
+    }
+  }
+}

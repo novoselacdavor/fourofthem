@@ -1,0 +1,53 @@
+/**
+ * Button
+ */
+
+%btn,
+.btn {
+  display: inline-block;
+  padding: $spacing ( $spacing * 2 );
+  font-size: 1rem;
+  line-height: 1.5;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+  transition-timing-function: $trans-timing-function-base;
+  transition-duration: $trans-duration-base;
+  transition-property: all;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+
+  &,
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:disabled,
+  &.disabled,
+  fieldset:disabled {
+    pointer-events: none;
+    opacity: .65;
+  }
+ }
+
+
+ /**
+  * Button variants
+  */
+
+%btn-orange,
+.btn--orange {
+  color: $white;
+  background-color: $orange;
+  border: .1rem solid $orange;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $orange;
+    background-color: $white;
+    border: .1rem solid $orange;
+  }
+}

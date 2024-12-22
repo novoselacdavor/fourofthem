@@ -102,6 +102,8 @@ define( 'WP_DEBUG_DISPLAY', false );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
+// Advanced Custom Fields PRO.
+define( 'ACF_PRO_LICENSE', 'b3JkZXJfaWQ9MTM5ODk4fHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOC0wOS0xOCAxNTowODowNA==' );
 
 
 /* That's all, stop editing! Happy publishing. */
