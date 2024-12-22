@@ -5,6 +5,7 @@
 .footer {
   background-color: $gray-01;
   box-shadow: 0 0 1rem .25rem $gray-03;
+  margin-top: auto;
 
   &__inner {
     display: grid;

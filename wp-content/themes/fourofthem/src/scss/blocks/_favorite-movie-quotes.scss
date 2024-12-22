@@ -1,8 +1,22 @@
 .favorite-movie-quotes {
+  h2 {
+    @include media-breakpoint-down(md) {
+      font-size: 3.2rem;
+    }
+
+    @include media-breakpoint-down(s) {
+      font-size: 2.4rem;
+    }
+  }
+
   &__items {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
+
+    @include media-breakpoint-up(s) {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
     @include media-breakpoint-up(md) {
       grid-template-columns: repeat(3, 1fr);

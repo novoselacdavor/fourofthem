@@ -20,4 +20,9 @@
       grid-template-columns: repeat(3, 1fr);
     }
   }
+
+  #movie-list {
+    position: relative;
+    min-height: 50rem;
+  }
 }

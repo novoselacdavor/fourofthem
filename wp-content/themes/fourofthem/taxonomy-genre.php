@@ -1,9 +1,11 @@
 <?php
 get_header();
+
+$term_name = get_query_var( 'term' );
 ?>
 <div class="container mt-4 mb-4">
 	<h1 class="archive__title">
-		<?php esc_html_e( 'Movies', 'fourofthem' ); ?>
+		<?php echo esc_html( $term_name ); ?>
 	</h1>
 	<?php
 	if ( have_posts() ) :

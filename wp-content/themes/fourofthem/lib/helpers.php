@@ -33,6 +33,52 @@ function fot_get_field( string $field_selector, $post_id = null, bool $format_va
 }
 
 /**
+ * Get movies by genre.
+ *
+ * @param array $data {
+ *     The data to pass to the function.
+ *
+ *     @type string $genre The genre to filter by.
+ * }
+ *
+ * @return WP_Post[] The movies that match the genre.
+ */
+function get_movies_by_genre( $data ) {
+  $genre = $data['genre'];
+
+  $args = array(
+    'post_type' => 'movie',
+    'tax_query' => array(
+      array(
+        'taxonomy' => 'genre',
+        'field'    => 'slug',
+        'terms'    => $genre,
+      ),
+    ),
+  );
+
+  $movies = get_posts( $args );
+
+  return $movies;
+}
+
+/**
+ * Returns the src of the image for the given object and field name.
+ *
+ * @param object $object The object to get the image from.
+ * @param string $field_name The name of the field that contains the image.
+ * @param object $request The current request object.
+ *
+ * @return string The src of the image.
+ */
+function get_image_src( $object ) {
+	$size = 'img-3x2-450'; // Change this to the size you want | 'medium' / 'large'
+	$feat_img_array = wp_get_attachment_image( $object['featured_media'], $size, true );
+
+	return $feat_img_array[0];
+}
+
+/**
  * Movies shortcode.
  *
  * @param array $atts {
@@ -81,10 +127,10 @@ add_shortcode(
 
 			while ( $movies->have_posts() ) {
 				$movies->the_post();
-        ob_start();
-        get_template_part( 'templates/content', 'movie' );
-        $content = ob_get_clean();
-        $output .= $content;
+				ob_start();
+				get_template_part( 'templates/content', 'movie' );
+				$content = ob_get_clean();
+				$output .= $content;
 			}
 
 			$output .= '</div>';
@@ -95,26 +141,5 @@ add_shortcode(
 		}
 
 		return $output;
-	}
-);
-
-
-add_action(
-	'acf/init',
-	function() {
-		// check function exists
-		if( function_exists('acf_register_block') ) {
-
-			// register a testimonial block
-			acf_register_block(array(
-				'name'              => 'testimonial',
-				'title'             => __('Testimonial'),
-				'description'       => __('A custom testimonial block.'),
-				'render_callback'   => 'my_acf_block_render_callback',
-				'category'          => 'formatting',
-				'icon'              => 'admin-comments',
-				'keywords'          => array( 'testimonial', 'quote' ),
-			));
-		}
 	}
 );

@@ -141,3 +141,25 @@ add_filter(
  * Disable prefixes on archive titles.
  */
 add_filter( 'get_the_archive_title_prefix', '__return_empty_string' );
+
+/**
+ * Registers a REST endpoint to get movies by genre.
+ *
+ * @since 1.0.0
+ *
+ * @link https://developer.wordpress.org/rest-api/extending-the-rest-api/adding-custom-endpoints/
+ */
+
+add_action(
+	'rest_api_init',
+	function() {
+		register_rest_route(
+			'wp/v2',
+			'movies/genre/(?P<genre>\w+)',
+			[
+				'methods'  => 'GET',
+				'callback' => 'get_movies_by_genre',
+			]
+		);
+	}
+);
