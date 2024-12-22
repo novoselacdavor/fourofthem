@@ -31,3 +31,69 @@ function fourofthem_get_field( string $field_selector, $post_id = null, bool $fo
 
 	return $return_value;
 }
+
+/**
+ * Movies shortcode.
+ *
+ * @param array $atts {
+ *   Shortcode attributes.
+ *
+ *   @type string $genre Genre(s) to filter movies by.
+ *   @type int    $posts_per_page The number of posts to show per page. Defaults to -1 (all posts).
+ * }
+ *
+ * @return string The HTML output of the shortcode.
+ */
+
+add_shortcode(
+	'movies',
+	function( $atts ) {
+		$args = shortcode_atts(
+			[
+				'genre'          => '',
+				'posts_per_page' => -1,
+			],
+			$atts
+		);
+
+		$query_args = [
+			'post_type'      => 'movie',
+			'posts_per_page' => $args['posts_per_page'],
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+		];
+
+		if ( ! empty( $args['genre'] ) ) {
+			$query_args['tax_query'] = [
+				[
+					'taxonomy' => 'genre',
+					'field'    => 'slug',
+					'terms'    => $args['genre'],
+				],
+			];
+		}
+
+		$movies = new WP_Query( $query_args );
+		$output = '';
+
+		if ( $movies->have_posts() ) {
+			$output .= '<div class="item-listing">';
+
+			while ( $movies->have_posts() ) {
+				$movies->the_post();
+        ob_start();
+        get_template_part( 'templates/content', 'movie' );
+        $content = ob_get_clean();
+        $output .= $content;
+			}
+
+			$output .= '</div>';
+			wp_reset_postdata();
+
+		} else {
+			$output = '<p>No movies found.</p>';
+		}
+
+		return $output;
+	}
+);

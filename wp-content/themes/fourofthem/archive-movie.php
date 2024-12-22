@@ -8,7 +8,7 @@ get_header();
 	<?php
 	if ( have_posts() ) :
 	?>
-	<div class="archive__item-list">
+	<div class="archive__item-list item-listing">
 		<?php
 		while ( have_posts() ) : the_post();
 			get_template_part( 'templates/content', 'movie' );
