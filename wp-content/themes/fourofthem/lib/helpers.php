@@ -44,38 +44,49 @@ function fot_get_field( string $field_selector, $post_id = null, bool $format_va
  * @return WP_Post[] The movies that match the genre.
  */
 function get_movies_by_genre( $data ) {
-  $genre = $data['genre'];
+	$rest_data = [];
+  $genre     = $data['genre'];
 
-  $args = array(
-    'post_type' => 'movie',
-    'tax_query' => array(
-      array(
-        'taxonomy' => 'genre',
-        'field'    => 'slug',
-        'terms'    => $genre,
-      ),
-    ),
+	// Query to get movies with args
+	$query = new WP_Query(
+		[
+			'post_type' => 'movie',
+			'tax_query' => [
+				array(
+					'taxonomy' => 'genre',
+					'field'    => 'slug',
+					'terms'    => $genre,
+				),
+			],
+		]
   );
 
-  $movies = get_posts( $args );
+	// Get movies
+  $movies = $query->get_posts();
 
-  return $movies;
-}
+	// Filter Movies data
+	foreach ( $movies as $movie ) {
+		$rest_data[] = [
+      'id'      => $movie->ID,
+      'title'   => $movie->post_title,
+      'url'     => get_permalink( $movie->ID ),
+      'image'   => get_the_post_thumbnail( $movie->ID, 'img-3x2-450' ),
+      'excerpt' => get_the_excerpt( $movie->ID ),
+      'classes' => implode( ' ', get_post_class( [ 'card', 'card--movie' ], $movie->ID ) ),
+    ];
+	}
 
-/**
- * Returns the src of the image for the given object and field name.
- *
- * @param object $object The object to get the image from.
- * @param string $field_name The name of the field that contains the image.
- * @param object $request The current request object.
- *
- * @return string The src of the image.
- */
-function get_image_src( $object ) {
-	$size = 'img-3x2-450'; // Change this to the size you want | 'medium' / 'large'
-	$feat_img_array = wp_get_attachment_image( $object['featured_media'], $size, true );
+	// Reset query
+  wp_reset_postdata();
 
-	return $feat_img_array[0];
+	// Create the response object
+	$response = new WP_REST_Response( $rest_data );
+
+	// Set a status code
+  $response->set_status( 200 );
+
+	// Return the response
+  return $response;
 }
 
 /**

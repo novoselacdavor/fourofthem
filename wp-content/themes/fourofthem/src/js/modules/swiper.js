@@ -5,9 +5,9 @@
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 
-const buttonNext = document.querySelector('.swiper-button-next');
+const buttonNext     = document.querySelector('.swiper-button-next');
 const buttonPrevious = document.querySelector('.swiper-button-prev');
-const pagination = document.querySelector('.swiper-pagination');
+const pagination     = document.querySelector('.swiper-pagination');
 
 new Swiper('.swiper--hero', {
   modules: [Navigation, Pagination],

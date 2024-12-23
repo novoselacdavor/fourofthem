@@ -1,107 +1,89 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  // Get the genre filter
   const genreFilter = document.getElementById('genre-filter');
 
-  if (genreFilter) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const currentGenre = urlParams.get('genre');
+  // If the genre filter doesn't exist, exit
+  if (! genreFilter) return;
 
-    if (currentGenre) {
-      genreFilter.value = currentGenre;
-    }
+  // Get the current genre
+  const urlParams    = new URLSearchParams(window.location.search);
+  const currentGenre = urlParams.get('genre');
 
-    genreFilter.addEventListener('change', (event) => {
-      const loader = document.querySelector('.loader');
-      const genre = event.target.value;
-      const movieList = document.querySelector('#movie-list .item-listing');
+  // If the current genre is set, set the genre filter to the current genre
+  if (currentGenre) {
+    genreFilter.value = currentGenre;
+  }
 
+  // Add event listener to the genre filter
+  genreFilter.addEventListener('change', async (event) => {
+    // Getting loader, genre and movie list
+    const loader    = document.querySelector('.loader');
+    const genre     = event.target.value;
+    const movieList = document.querySelector('#movie-list .item-listing');
+
+    try {
       // Show the loader
       loader.classList.add('active');
 
       // Empty the movie list
       movieList.innerHTML = '';
 
+      // If the genre is empty, reload the page to show all movies, or get the data
       if (genre === '') {
         // Reset the filter and reload the page
         const url = new URL(window.location.href);
+
+        // Remove the genre parameter
         url.searchParams.delete('genre');
-        history.pushState(null, null, url.href);
-        location.reload();
+
+        // Update the URL
+        history.replaceState(null, null, url.href);
+
+        // Trigger a page reload
+        window.location = url.href;
       } else {
         // Update the URL with the new genre
         const newUrl = `${window.location.pathname}?genre=${genre}`;
+
+        // Update the URL in the browser's address bar
         history.pushState(null, null, newUrl);
 
-        fetch(`/wp-json/wp/v2/movies/genre/${genre}`)
-          .then((response) => response.json())
-          .then((data) => {
-            data.map((movie) => {
-              const movieID = movie.ID;
+        // Get the data from the API
+        const response = await fetch(`/wp-json/wp/v2/movies/genre/${genre}`);
+        const data     = await response.json();
 
-              getMediaImageByMovieId(movieID).then(featuredMediaId => {
-                getFeaturedImage(featuredMediaId).then(imageHtml => {
-                  const movieItem = `
-                    <article class="card card--movie post-${movie.id} movie type-movie status-${movie.post_status} has-post-thumbnail hentry genre-drama">
-                      <a class="card__link" href="${movie.guid}">
-                        <div class="card__img-wrap">
-                          ${imageHtml}
-                        </div>
-                        <div class="card__content">
-                          <h3 class="card__title">${movie.post_title}</h3>
-                          <div class="card__description">
-                            <p>${movie.post_excerpt}</p>
-                          </div>
-                        </div>
-                      </a>
-                    </article>
-                  `;
-                  movieList.insertAdjacentHTML('beforeend', movieItem);
-                });
-              });
-            });
+        // Loop through the movies
+        data.forEach((movie) => {
+          // Create the movie item structure ( based on the template )
+          const movieItem = `
+            <article class="${movie.classes}">
+              <a class="card__link" href="${movie.url}">
+                <div class="card__img-wrap">
+                  ${movie.image}
+                </div>
+                <div class="card__content">
+                  <h3 class="card__title">${movie.title}</h3>
+                  <div class="card__description">
+                    <p>${movie.excerpt}</p>
+                  </div>
+                </div>
+              </a>
+            </article>
+          `;
 
-            // Show the movie list
-            movieList.classList.remove('hidden');
+          // Add the movie item to the movie list
+          movieList.insertAdjacentHTML('beforeend', movieItem);
+        });
 
-            // Hide the loader
-            loader.classList.remove('active');
-          });
+        // Show the movie list
+        movieList.classList.remove('hidden');
+
+        // Hide the loader
+        loader.classList.remove('active');
       }
-    });
-  }
+    } catch (error) {
+      // Log the error
+      console.error(error);
+    }
+  });
 });
-
-/**
- * Fetches the featured image for a given media ID and returns the HTML
- * string for the image tag.
- * @param {number} mediaID - The ID of the media item.
- * @return {Promise<string>} A promise that resolves to the HTML string of the
- * image tag.
- */
-function getFeaturedImage(mediaID) {
-  return fetch(`/wp-json/wp/v2/media/${mediaID}`)
-    .then(response => response.json())
-    .then(media => {
-      const imageUrl = media.media_details.sizes['img-3x2-450'].source_url;
-      const imageWidth = media.media_details.sizes['img-3x2-450'].width;
-      const imageHeight = media.media_details.sizes['img-3x2-450'].height;
-      const srcset = media.media_details.sizes['img-3x2-450'].source_url + ' 450w, ' + media.media_details.sizes['img-3x2-1200'].source_url + ' 1200w';
-      const sizes = '(max-width: 450px) 100vw, 450px';
-
-      return `<img width="${imageWidth}" height="${imageHeight}" src="${imageUrl}" class="attachment-img-3x2-450 size-img-3x2-450 wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="${srcset}" sizes="${sizes}">`;
-    });
-}
-
-/**
- * Gets the ID of the featured media image for a given movie ID.
- *
- * @param {number} movieID The ID of the movie.
- * @return {Promise<number>} The ID of the featured media image.
- */
-function getMediaImageByMovieId(movieID) {
-  return fetch(`/wp-json/wp/v2/movie/${movieID}`)
-    .then(response => response.json())
-    .then(postData => {
-      const featuredMediaId = postData.featured_media;
-      return featuredMediaId;
-    });
-}
