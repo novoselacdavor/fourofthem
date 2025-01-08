@@ -36,12 +36,12 @@ function fot_get_field( string $field_selector, $post_id = null, bool $format_va
  * Get movies by genre.
  *
  * @param array $data {
- *     The data to pass to the function.
+ *   The data to pass to the function.
  *
- *     @type string $genre The genre to filter by.
+ *   @type string $genre The genre to filter by.
  * }
  *
- * @return WP_Post[] The movies that match the genre.
+ * @return WP_REST_Response The movies that match the genre.
  */
 function get_movies_by_genre( $data ) {
 	$rest_data = [];
@@ -67,12 +67,12 @@ function get_movies_by_genre( $data ) {
 	// Filter Movies data
 	foreach ( $movies as $movie ) {
 		$rest_data[] = [
-      'id'      => $movie->ID,
-      'title'   => $movie->post_title,
-      'url'     => get_permalink( $movie->ID ),
-      'image'   => get_the_post_thumbnail( $movie->ID, 'img-3x2-450' ),
-      'excerpt' => get_the_excerpt( $movie->ID ),
-      'classes' => implode( ' ', get_post_class( [ 'card', 'card--movie' ], $movie->ID ) ),
+			'id'      => $movie->ID,
+			'title'   => $movie->post_title,
+			'url'     => get_permalink( $movie->ID ),
+			'image'   => get_the_post_thumbnail( $movie->ID, 'img-3x2-450' ),
+			'excerpt' => get_the_excerpt( $movie->ID ),
+			'classes' => implode( ' ', get_post_class( [ 'card', 'card--movie' ], $movie->ID ) ),
     ];
 	}
 
